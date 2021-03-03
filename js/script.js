@@ -3,18 +3,14 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
-// For assistance: 
-  // Check the "Project Resources" section of the project instructions
-  // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
 
 /*** 
- * `quotes` array 
+ * Created `quotes` array of objects
 ***/
 const quotes = [  
   {quote:'If You Are Working On Something That You Really Care About, You Don’t Have To Be Pushed. The Vision Pulls You.', 
    source:'Steve Jobs',
-   citation:'Motivating thoughts of Steve Jobs', 
-   year: 2009},
+  },
   {quote: "Mama always said life was like a box of chocolates. You never know what you're gonna get", 
    source:'Tom Hanks',
    citation:'Forrest Gump', 
@@ -30,7 +26,7 @@ const quotes = [
   {quote:'There is some good in this world, and it’s worth fighting for.', 
    source:'J.R.R. Tolkien',
    citation:'The Two Towers', 
-   year: 1954}
+  }
 
 ];
 
@@ -38,9 +34,16 @@ const quotes = [
 /***
  * `getRandomQuote` function
 ***/
+
 function getRandomQuote () {
+  //Created a variable that generates a random number
   let randomQuote = Math.floor(Math.random() * quotes.length);
+
+  /*Used the random number variable and bracket notation to grab a random object from the 'quotes' array
+  and assigned it to a new variable*/
   let qt = quotes[randomQuote];
+
+  //Return the new variable.
   return qt;
 }
 
@@ -48,27 +51,33 @@ function getRandomQuote () {
 /***
  * `printQuote` function
 ***/
+
 function printQuote(){
+  //Created a variable that calls the getRandomQuote() function
   let j = getRandomQuote();
+
+  // Created a variable that initiates the HTML string 
   let html=''
+
   html = 
     `<p class="quote">${j.quote}` +
     `<p class="source">${j.source}`;
-      if ( j.citation == true ) {
-      html + `<span class="citation">${j.citation}</span>`}
-      if ( typeof j.year == Number){ 
-      html +`<span class="year">${j.year}</span>`}
+
+  /*Used an if statement to check if the citation or year property 
+    exists, and if it does, concatenate a <span></span> 
+    element, appropriate className, and citation property 
+    to the HTML string */
+    if ( j.citation ) {
+      html += `<span class="citation">${j.citation}</span>`}
+      if ( j.year ){ 
+      html += `<span class="year">${j.year}</span>`}
     `</p>`
     
-        
+   /* Set the innerHTML of the quote-box div to equal the 
+     complete HTML string*/     
   document.getElementById("quote-box").innerHTML = html;
   
 }
-console.log(printQuote());
 
-/***
- * click event listener for the print quote button
- * DO NOT CHANGE THE CODE BELOW!!
-***/
 
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
